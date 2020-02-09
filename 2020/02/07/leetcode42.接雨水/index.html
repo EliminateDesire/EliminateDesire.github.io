@@ -6,20 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>使用Hexo搭建个人博客，并部署到github | qiyuqiyu&#39;s blog</title>
+  <title>leetcode42.接雨水 | qiyuqiyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="武汉加油！中国加油！因为疫情的原因春节在家宅了好久，折腾了一天也算初步搭好了自己的博客，第一篇就先写个搭建博客的教程吧。  安装环境配置安装node.js在 https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 上下载并且安装最新版本的node.js，之后在命令行中使用以下两个命令查看，若显示版本号则安装成功。 node -v npm -v安装Hexo">
+  <meta name="description" content="题目描述 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。  上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用Hexo搭建个人博客，并部署到github">
-<meta property="og:url" content="http://yoursite.com/2020/01/30/test/index.html">
+<meta property="og:title" content="leetcode42.接雨水">
+<meta property="og:url" content="http://yoursite.com/2020/02/07/leetcode42.%E6%8E%A5%E9%9B%A8%E6%B0%B4/index.html">
 <meta property="og:site_name" content="qiyuqiyu&#39;s blog">
-<meta property="og:description" content="武汉加油！中国加油！因为疫情的原因春节在家宅了好久，折腾了一天也算初步搭好了自己的博客，第一篇就先写个搭建博客的教程吧。  安装环境配置安装node.js在 https:&#x2F;&#x2F;nodejs.org&#x2F;en&#x2F; 上下载并且安装最新版本的node.js，之后在命令行中使用以下两个命令查看，若显示版本号则安装成功。 node -v npm -v安装Hexo">
+<meta property="og:description" content="题目描述 给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。  上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-01-30T10:02:50.000Z">
-<meta property="article:modified_time" content="2020-02-04T12:41:25.773Z">
+<meta property="og:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png">
+<meta property="article:published_time" content="2020-02-07T06:02:53.000Z">
+<meta property="article:modified_time" content="2020-02-09T10:27:13.387Z">
 <meta property="article:author" content="其雨其雨">
-<meta property="article:tag" content="环境配置">
+<meta property="article:tag" content="双指针">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png">
   
     <link rel="alternative" href="/atom.xml" title="qiyuqiyu&#39;s blog" type="application/atom+xml">
   
@@ -151,64 +153,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-test" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-leetcode42.接雨水" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      使用Hexo搭建个人博客，并部署到github
+      leetcode42.接雨水
     </h1>
   
 
         
-        <a href="/2020/01/30/test/" class="archive-article-date">
-  	<time datetime="2020-01-30T10:02:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-30</time>
+        <a href="/2020/02/07/leetcode42.%E6%8E%A5%E9%9B%A8%E6%B0%B4/" class="archive-article-date">
+  	<time datetime="2020-02-07T06:02:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-07</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="武汉加油！中国加油！"><a href="#武汉加油！中国加油！" class="headerlink" title=" 武汉加油！中国加油！"></a><font color = red> 武汉加油！中国加油！</font></h1><p>因为疫情的原因春节在家宅了好久，折腾了一天也算初步搭好了自己的博客，第一篇就先写个搭建博客的教程吧。</p>
-<hr>
-<h2 id="安装环境配置"><a href="#安装环境配置" class="headerlink" title="安装环境配置"></a>安装环境配置</h2><h3 id="安装node-js"><a href="#安装node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>在 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a> 上下载并且安装最新版本的node.js，之后在命令行中使用以下两个命令查看，若显示版本号则安装成功。</p>
-<pre><code>node -v
-npm -v</code></pre><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><a id="more"></a> >>
+        <h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><hr>
+<p>给定 <em>n</em> 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。</p>
+<p><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2018/10/22/rainwatertrap.png" alt="img"></p>
+<p>上面是由数组 [0,1,0,2,1,0,1,3,2,1,2,1] 表示的高度图，在这种情况下，可以接 6 个单位的雨水（蓝色部分表示雨水）。</p>
+<a id="more"></a> >>
 
-<p>如果使用的不是校网或者没挂梯子，最好给npm换个源（淘宝源），此步可省略。</p>
-<pre><code>npm install -g cnpm --registry=https://registry.npm.taobao.org</code></pre><p>如果使用了上一步，以下所有含有 <code>npm</code> 的操作替换为 <code>cnpm</code> 。</p>
-<p>接下来安装Hexo</p>
-<pre><code>npm install -g hexo-cli</code></pre><p>查看Hexo版本</p>
-<pre><code>hexo -v</code></pre><hr>
-<h2 id="部署本地博客"><a href="#部署本地博客" class="headerlink" title="部署本地博客"></a>部署本地博客</h2><h3 id="创建博客"><a href="#创建博客" class="headerlink" title="创建博客"></a>创建博客</h3><p>在你想要的位置创建一个空文件夹，命名为blog，然后在命令行中cd到这个目录,运行以下命令:</p>
-<pre><code>hexo init</code></pre><p>如果卡住，可以尝试使用校网或者挂梯子。</p>
-<p>如果出现一个“日志中已存在”的错误，可以尝试用以下命令来清空npm的缓存，之后重来.</p>
-<pre><code>npm cache clean --force</code></pre><h3 id="本地预览"><a href="#本地预览" class="headerlink" title="本地预览"></a>本地预览</h3><p>cd到blog的根目录，键入以下命令:</p>
-<pre><code>hexo s</code></pre><p>如果出现以下提示则成功(win系统):</p>
-<pre><code>INFO  Start processing
-INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></pre><p>然后在浏览器中输入 localhost:4000 即可访问本地博客。</p>
-<h2 id="将博客推送到远端"><a href="#将博客推送到远端" class="headerlink" title="将博客推送到远端"></a>将博客推送到远端</h2><h3 id="推送到github"><a href="#推送到github" class="headerlink" title="推送到github"></a>推送到github</h3><p>登录你的github，然后新建一个仓库，注意命名必须为: xxx.github.io（xxx是你的用户名）。</p>
-<p>然后点击<strong>Create</strong> ,会生成一个git地址，复制下来。</p>
-<p>然后再打开命令行，cd到刚刚的blog目录，输入命令:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --save deployer-git</span><br></pre></td></tr></table></figure>
+<h3 id="解答"><a href="#解答" class="headerlink" title="解答"></a>解答</h3><hr>
+<p>不难发现，能够接水的条件是左右两边的柱子都高于自己，并且取决于左右两边矮的那个。</p>
+<p>那么不必每个凹槽一起算，可以算每个格子对于答案的共享，然后累加答案。</p>
+<p>可以正序，逆序各遍历一遍数组，得到每个格子左边、右边的最高的值，分别用一个数组存储。</p>
+<p>然后遍历一遍累加得到答案。</p>
+<p>Java实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> l[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100005</span>];</span><br><span class="line">        <span class="keyword">int</span> r[] = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100005</span>];</span><br><span class="line">        <span class="keyword">int</span> len = height.length;</span><br><span class="line">        <span class="keyword">if</span>(len == <span class="number">0</span>)    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        ans = height[<span class="number">0</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; len; ++i)&#123;</span><br><span class="line">            l[i] = ans;</span><br><span class="line">            ans = Math.max(ans,height[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        ans = height[len - <span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = len - <span class="number">2</span>;i &gt;= <span class="number">0</span>; --i)&#123;</span><br><span class="line">            r[i] = ans;</span><br><span class="line">            ans = Math.max(ans,height[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>;i &lt; len - <span class="number">1</span>; ++i)&#123;</span><br><span class="line">            <span class="keyword">if</span>(l[i] &gt; height[i] &amp;&amp; r[i] &gt; height[i])&#123;</span><br><span class="line">                res += Math.min(l[i] - height[i],r[i] - height[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>之后打开blog目录下的<strong>_config.yml</strong>文件，将最底部的deployment的配置改为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repo: https:&#x2F;&#x2F;github.com&#x2F;xxx&#x2F;xxx.github.io.git（你刚刚复制的git地址）</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+<p>时间复杂度 : O ( <em>n</em> )</p>
+<p>空间复杂度:  O ( <em>n</em> )</p>
+<p>提交之后发现空间复杂度有点高了。</p>
+<p>看了一下题解，原来可以把那个数组优化掉。（艹，又是双指针）</p>
+<p>由于每个格子对答案的贡献只取决于左右两边低的那个，可以发现：</p>
+<p>如果右边有更高的格子，那么当前位置积水的高度可以根据左边计算，并且可以算接下来（方向从左到右）的格子，因为当前格子已经不会再对后面的格子产生影响。反之亦然。</p>
+<p>所以我们可以设置前后两个指针，同时维护左边最大值 <em>lmax</em> 和右边最大值 <em>rmax</em> ，当右边指针格子更高时，处理左边，根据当前格子高度与左边的最大值的关系来决定更新答案或者更新最大值。反之亦然。</p>
+<p>Java实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">trap</span><span class="params">(<span class="keyword">int</span>[] height)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = height.length;</span><br><span class="line">        <span class="keyword">int</span> lmax = <span class="number">0</span>,rmax = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> l = <span class="number">0</span>,r = len - <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r)&#123;</span><br><span class="line">            <span class="keyword">if</span>(height[l] &lt; height[r])&#123;</span><br><span class="line">                <span class="keyword">if</span>(height[l] &gt; lmax)    lmax = height[l];</span><br><span class="line">                <span class="keyword">else</span>    ans += lmax - height[l];</span><br><span class="line">                l++;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">if</span>(height[r] &gt; rmax)     rmax = height[r];</span><br><span class="line">                <span class="keyword">else</span>    ans += rmax - height[r];</span><br><span class="line">                r--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>保存退出，在blog目录下输入命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p>即可推送到远端。</p>
-<p>然后稍等一会儿，输入xxx.github.io即可访问你的博客。</p>
-<h2 id="写文章"><a href="#写文章" class="headerlink" title="写文章"></a>写文章</h2><p>在<strong>blog-&gt;source-&gt;_posts</strong>目录下仿照已有的 <strong>hello-world.md</strong> 新建markdown文档，保存退出之后<strong>blog</strong>目录下输入:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">hexo clean &#x2F;&#x2F;清理</span><br><span class="line">hexo g	&#x2F;&#x2F;生成博客</span><br><span class="line">hexo s	&#x2F;&#x2F;部署到本地，可在localhost:4000查看，Ctrl + c退出</span><br><span class="line">hexo d &#x2F;&#x2F;推送到远端</span><br></pre></td></tr></table></figure>
-
-<p>然后稍等一会儿就可以看到更新了。</p>
-<p>推荐一个换皮肤的地址：<a href="https://github.com/litten/hexo-theme-yilia" target="_blank" rel="noopener">https://github.com/litten/hexo-theme-yilia</a></p>
-<hr>
-<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a href="https://www.bilibili.com/video/av44544186" target="_blank" rel="noopener">https://www.bilibili.com/video/av44544186</a></p>
+<p>时间复杂度 : O ( <em>n</em> )</p>
+<p>空间复杂度:  O ( <em>1</em> )</p>
 
       
 
@@ -248,7 +238,7 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">双指针</a>
         		</li>
       		
 		</ul>
@@ -304,7 +294,7 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/01/30/test/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/07/leetcode42.%E6%8E%A5%E9%9B%A8%E6%B0%B4/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -318,18 +308,9 @@ INFO  Hexo is running at http://localhost:4000 . Press Ctrl+C to stop.</code></p
   
 <nav id="article-nav">
   
-    <a href="/2020/02/04/Redis%E5%9F%BA%E7%A1%80/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Redis基础语法
-        
-      </div>
-    </a>
   
-  
-    <a href="/2020/01/30/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
+    <a href="/2020/02/04/Redis%E5%9F%BA%E7%A1%80/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Redis基础语法</div>
       <i class="icon-circle-right"></i>
     </a>
   
