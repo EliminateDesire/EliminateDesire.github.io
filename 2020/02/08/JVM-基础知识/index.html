@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 环境配置 | qiyuqiyu&#39;s blog</title>
+  <title>Java虚拟机——基础知识 | qiyuqiyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="qiyuqiyu&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+  <meta name="description" content="Java虚拟机基本组成类装载器子系统 加载 链接 初始化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java虚拟机——基础知识">
+<meta property="og:url" content="http://yoursite.com/2020/02/08/JVM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/index.html">
 <meta property="og:site_name" content="qiyuqiyu&#39;s blog">
+<meta property="og:description" content="Java虚拟机基本组成类装载器子系统 加载 链接 初始化">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-08T02:34:43.000Z">
+<meta property="article:modified_time" content="2020-02-14T10:22:33.139Z">
 <meta property="article:author" content="其雨其雨">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="qiyuqiyu&#39;s blog" type="application/atom+xml">
@@ -140,60 +145,237 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM-基础知识" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/30/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-01-30T10:02:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/30/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">使用Hexo搭建个人博客，并部署到github</a>
+    <h1 class="article-title" itemprop="name">
+      Java虚拟机——基础知识
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/08/JVM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" class="archive-article-date">
+  	<time datetime="2020-02-08T02:34:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-08</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a>Java虚拟机</h1><h2 id="基本组成"><a href="#基本组成" class="headerlink" title="基本组成"></a>基本组成</h2><h4 id="类装载器子系统"><a href="#类装载器子系统" class="headerlink" title="类装载器子系统"></a>类装载器子系统</h4><ul>
+<li>加载</li>
+<li>链接</li>
+<li>初始化</li>
+</ul>
+<a id="more"></a>
+
+<h4 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h4><ul>
+<li>方法区：存放加载的类信息以及常量池信息</li>
+<li>堆</li>
+<li>虚拟机栈（线程独享）</li>
+<li>pc寄存器（线程独享）</li>
+</ul>
+<h4 id="执行引擎"><a href="#执行引擎" class="headerlink" title="执行引擎"></a>执行引擎</h4><ul>
+<li>解释器：保证响应时间</li>
+<li>JIT（即时编译器，为后端编译器）：用于处理反复执行的热点代码，保证执行性能</li>
+<li>垃圾回收器</li>
+</ul>
+<h2 id="JVM的生命周期"><a href="#JVM的生命周期" class="headerlink" title="JVM的生命周期"></a>JVM的生命周期</h2><h4 id="虚拟机的启动"><a href="#虚拟机的启动" class="headerlink" title="虚拟机的启动"></a>虚拟机的启动</h4><ul>
+<li>通过引导类加载器创建一个初始类来完成</li>
+<li>这个类由虚拟机的具体实现指定</li>
+</ul>
+<h4 id="虚拟机的执行"><a href="#虚拟机的执行" class="headerlink" title="虚拟机的执行"></a>虚拟机的执行</h4><ul>
+<li>执行一个Java程序，实际上是执行一个Java虚拟机的进程。</li>
+</ul>
+<h4 id="虚拟机的退出"><a href="#虚拟机的退出" class="headerlink" title="虚拟机的退出"></a>虚拟机的退出</h4><ul>
+<li>程序正常执行结束</li>
+<li>程序在执行过程中遇到了异常或错误而终止</li>
+<li>操作系统错误导致Java虚拟机进程终止</li>
+<li>某线程调用了Runtime类或System类的exit方法，或Runtime类的halt方法</li>
+</ul>
+<h2 id="几种常见的Java虚拟机"><a href="#几种常见的Java虚拟机" class="headerlink" title="几种常见的Java虚拟机"></a>几种常见的Java虚拟机</h2><h4 id="BEA的JRockit"><a href="#BEA的JRockit" class="headerlink" title="BEA的JRockit"></a>BEA的JRockit</h4><ul>
+<li>专注于服务端应用</li>
+<li>不关注程序的启动速度，因此内部不包含解释器，只有JIT</li>
+</ul>
+<h4 id="IBM的J9"><a href="#IBM的J9" class="headerlink" title="IBM的J9"></a>IBM的J9</h4><ul>
+<li>广泛用于本公司的各种Java产品</li>
+<li>对自己的平台较友好</li>
+</ul>
+<h4 id="TaobaoJVM"><a href="#TaobaoJVM" class="headerlink" title="TaobaoJVM"></a>TaobaoJVM</h4><ul>
+<li>创新的GCIH实现了off-heap，将生命周期教长的Java对象从heap中移到heap之外。</li>
+<li>以此达到降低GC的回收频率，提升GC的回收效率。</li>
+<li>GCIH中的对象还能够在多个Java虚拟机进程中实现共享。</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/08/JVM-%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/02/10/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Java虚拟机——类加载子系统
+        
+      </div>
+    </a>
   
   
-    </div></section>
+    <a href="/2020/02/07/leetcode42.%E6%8E%A5%E9%9B%A8%E6%B0%B4/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">leetcode42.接雨水</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机"><span class="toc-number">1.</span> <span class="toc-text">Java虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基本组成"><span class="toc-number">1.1.</span> <span class="toc-text">基本组成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#类装载器子系统"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">类装载器子系统</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#运行时数据区"><span class="toc-number">1.1.0.2.</span> <span class="toc-text">运行时数据区</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#执行引擎"><span class="toc-number">1.1.0.3.</span> <span class="toc-text">执行引擎</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JVM的生命周期"><span class="toc-number">1.2.</span> <span class="toc-text">JVM的生命周期</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟机的启动"><span class="toc-number">1.2.0.1.</span> <span class="toc-text">虚拟机的启动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟机的执行"><span class="toc-number">1.2.0.2.</span> <span class="toc-text">虚拟机的执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#虚拟机的退出"><span class="toc-number">1.2.0.3.</span> <span class="toc-text">虚拟机的退出</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#几种常见的Java虚拟机"><span class="toc-number">1.3.</span> <span class="toc-text">几种常见的Java虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BEA的JRockit"><span class="toc-number">1.3.0.1.</span> <span class="toc-text">BEA的JRockit</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IBM的J9"><span class="toc-number">1.3.0.2.</span> <span class="toc-text">IBM的J9</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#TaobaoJVM"><span class="toc-number">1.3.0.3.</span> <span class="toc-text">TaobaoJVM</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -216,9 +398,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,

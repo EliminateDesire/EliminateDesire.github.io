@@ -6,14 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: 环境配置 | qiyuqiyu&#39;s blog</title>
+  <title>Java虚拟机—-运行时数据区 | qiyuqiyu&#39;s blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="qiyuqiyu&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/tags/%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/index.html">
+  <meta name="description" content="Java虚拟机运行时数据区PC寄存器 PC寄存器用来存储指向下一条指令的地址，即将要执行的指令代码，由执行引擎来读取。 在切换线程的时候，需要PC寄存器来知道接着从哪开始继续执行。 线程私有（保证了程序计数器在各个线程之间互不影响）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java虚拟机—-运行时数据区">
+<meta property="og:url" content="http://yoursite.com/2020/02/14/JVM-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/index.html">
 <meta property="og:site_name" content="qiyuqiyu&#39;s blog">
+<meta property="og:description" content="Java虚拟机运行时数据区PC寄存器 PC寄存器用来存储指向下一条指令的地址，即将要执行的指令代码，由执行引擎来读取。 在切换线程的时候，需要PC寄存器来知道接着从哪开始继续执行。 线程私有（保证了程序计数器在各个线程之间互不影响）">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2020-02-14T02:34:43.000Z">
+<meta property="article:modified_time" content="2020-02-14T10:32:36.390Z">
 <meta property="article:author" content="其雨其雨">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="qiyuqiyu&#39;s blog" type="application/atom+xml">
@@ -140,60 +145,264 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-JVM-运行时数据区" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2020" class="archive-year">2020</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2020/01/30/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/" class="archive-article-date">
-  	<time datetime="2020-01-30T10:02:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-01-30</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2020/01/30/hexo%E6%90%AD%E5%BB%BA%E5%8D%9A%E5%AE%A2/">使用Hexo搭建个人博客，并部署到github</a>
+    <h1 class="article-title" itemprop="name">
+      Java虚拟机—-运行时数据区
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2020/02/14/JVM-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/" class="archive-article-date">
+  	<time datetime="2020-02-14T02:34:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-02-14</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java虚拟机"><a href="#Java虚拟机" class="headerlink" title="Java虚拟机"></a>Java虚拟机</h1><h2 id="运行时数据区"><a href="#运行时数据区" class="headerlink" title="运行时数据区"></a>运行时数据区</h2><h3 id="PC寄存器"><a href="#PC寄存器" class="headerlink" title="PC寄存器"></a>PC寄存器</h3><ul>
+<li>PC寄存器用来存储指向下一条指令的地址，即将要执行的指令代码，由执行引擎来读取。</li>
+<li>在切换线程的时候，需要PC寄存器来知道接着从哪开始继续执行。</li>
+<li>线程私有（保证了程序计数器在各个线程之间互不影响）</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="虚拟机栈"><a href="#虚拟机栈" class="headerlink" title="虚拟机栈"></a>虚拟机栈</h3><h4 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h4><ul>
+<li>每个线程对应一个虚拟机栈，栈帧对应一次次的方法调用</li>
+<li>生命周期和线程一致</li>
+<li>主管Java运行，保存方法的局部变量，对象的引用地址，参与方法调用和返回</li>
+</ul>
+<h4 id="栈帧的内容"><a href="#栈帧的内容" class="headerlink" title="栈帧的内容"></a>栈帧的内容</h4><ul>
+<li>局部变量表</li>
+<li>操作数栈</li>
+<li>动态链接（或指向运行时常量池的方法引用）</li>
+<li>方法返回地址</li>
+<li>一些附加信息</li>
+</ul>
+<h4 id="局部变量表"><a href="#局部变量表" class="headerlink" title="局部变量表"></a>局部变量表</h4><ul>
+<li>定义为数组，用于存储方法参数和定义在方法体内的局部变量</li>
+<li>容量在编译器被确定下来</li>
+<li>局部变量表中的变量只对当前方法有效</li>
+</ul>
+<h5 id="基本存储单元（Slot）"><a href="#基本存储单元（Slot）" class="headerlink" title="基本存储单元（Slot）"></a>基本存储单元（Slot）</h5><ul>
+<li>如果当前帧是由构造方法或实例方法创建，该对象的引用this会放在index为0的slot处。(静态方法没有this)</li>
+<li>槽位可以重复利用</li>
+</ul>
+<h4 id="变量的分类"><a href="#变量的分类" class="headerlink" title="变量的分类"></a>变量的分类</h4><ul>
+<li>成员变量（静态变量，实例变量），会默认赋值</li>
+<li>局部变量，使用前必须进行显示赋值</li>
+</ul>
+<hr>
+<h4 id="操作数栈"><a href="#操作数栈" class="headerlink" title="操作数栈"></a>操作数栈</h4><ul>
+<li>在方法执行过程中，根据字节码指令，往栈中写入数据或者提取数据，即push/pop。</li>
+<li>如果被调用的方法有返回值，则返回值将会被压入当前栈帧的操作数栈中。</li>
+</ul>
+<h5 id="栈顶缓存技术"><a href="#栈顶缓存技术" class="headerlink" title="栈顶缓存技术"></a>栈顶缓存技术</h5><ul>
+<li>将栈顶的元素全部缓存在物理cpu的寄存器中，以此降低对内存的读/写次数。</li>
+</ul>
+<hr>
+<h4 id="动态链接"><a href="#动态链接" class="headerlink" title="动态链接"></a>动态链接</h4><ul>
+<li>指向运行时常量池的方法引用</li>
+<li>常量池的作用：提供一些符号和常量，便于指令的识别</li>
+</ul>
+<hr>
+<h4 id="方法的调用"><a href="#方法的调用" class="headerlink" title="方法的调用"></a>方法的调用</h4><ul>
+<li>静态链接：对应早期绑定</li>
+<li>动态链接：对应晚期绑定</li>
+</ul>
+<h5 id="1-非虚方法"><a href="#1-非虚方法" class="headerlink" title="1. 非虚方法"></a>1. 非虚方法</h5><ul>
+<li><p>在编译时确定了具体的调用版本，这个版本在运行时不可变</p>
+</li>
+<li><p>静态方法，私有方法，final方法，实例构造器，父类方法</p>
+</li>
+<li><p>子类对象多态性的使用前提：类的继承关系，方法的重写。</p>
+</li>
+</ul>
+<h5 id="2-JVM中的方法调用指令"><a href="#2-JVM中的方法调用指令" class="headerlink" title="2. JVM中的方法调用指令"></a>2. JVM中的方法调用指令</h5><ul>
+<li>invokestatic：调用静态方法</li>
+<li>invokespecial：调用<init>方法，私有及父类方法，解析阶段唯一确定方法版本</li>
+<li>invokevirtual：调用所有虚方法</li>
+<li>invokeinterface：调用接口方法</li>
+<li>invokedynamic：动态解析出需要调用的方法，然后执行</li>
+</ul>
+<h5 id="3-Java语言中方法重写的本质"><a href="#3-Java语言中方法重写的本质" class="headerlink" title="3. Java语言中方法重写的本质"></a>3. Java语言中方法重写的本质</h5><ul>
+<li>找到操作数栈顶的第一个元素所执行的对象的实际类型，记作C</li>
+<li>如果在则过程结束，否则找到常量中的相符的方法，进行访问权限校验，通过返回引用</li>
+<li>否则，按照继承关系从下往上对C的各个父类进行第2步。</li>
+<li>若找不到，则抛出java.lang.AbstractMethodError异常。</li>
+</ul>
+<h5 id="4-虚方法表"><a href="#4-虚方法表" class="headerlink" title="4.虚方法表"></a>4.虚方法表</h5><ul>
+<li>为了提高性能，JVM在解析阶段创建了一个虚方法表，表中存放各个方法的实际入口。</li>
+</ul>
+<hr>
+<h4 id="方法返回地址"><a href="#方法返回地址" class="headerlink" title="方法返回地址"></a>方法返回地址</h4><ul>
+<li>存放调用该方法的pc寄存器的值。</li>
+<li>调用者的pc寄存器的值作为返回地址，即调用该方法的指令的下一条指令的地址。</li>
+<li>通过异常完成出口退出的不会给他的上层调用者产生任何的返回值。</li>
+</ul>
+
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    <div class="reward-box-item">
+                      <img class="reward-img" src="/img/Alipay.png">
+                      <span class="reward-type">支付宝</span>
+                    </div>
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">环境配置</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/02/14/JVM-%E8%BF%90%E8%A1%8C%E6%97%B6%E6%95%B0%E6%8D%AE%E5%8C%BA/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2020/02/10/JVM-%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%AD%90%E7%B3%BB%E7%BB%9F/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Java虚拟机——类加载子系统</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+        <div class="toc-container tooltip-left">
+            <i class="icon-font icon-category"></i>
+            <div class="tooltip tooltip-east">
+                <span class="tooltip-item">
+                </span>
+                <span class="tooltip-content">
+                    <div class="toc-article">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Java虚拟机"><span class="toc-number">1.</span> <span class="toc-text">Java虚拟机</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#运行时数据区"><span class="toc-number">1.1.</span> <span class="toc-text">运行时数据区</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PC寄存器"><span class="toc-number">1.1.1.</span> <span class="toc-text">PC寄存器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#虚拟机栈"><span class="toc-number">1.1.2.</span> <span class="toc-text">虚拟机栈</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本内容"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">基本内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#栈帧的内容"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">栈帧的内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#局部变量表"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">局部变量表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基本存储单元（Slot）"><span class="toc-number">1.1.2.3.1.</span> <span class="toc-text">基本存储单元（Slot）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#变量的分类"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">变量的分类</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#操作数栈"><span class="toc-number">1.1.2.5.</span> <span class="toc-text">操作数栈</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#栈顶缓存技术"><span class="toc-number">1.1.2.5.1.</span> <span class="toc-text">栈顶缓存技术</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#动态链接"><span class="toc-number">1.1.2.6.</span> <span class="toc-text">动态链接</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法的调用"><span class="toc-number">1.1.2.7.</span> <span class="toc-text">方法的调用</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-非虚方法"><span class="toc-number">1.1.2.7.1.</span> <span class="toc-text">1. 非虚方法</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-JVM中的方法调用指令"><span class="toc-number">1.1.2.7.2.</span> <span class="toc-text">2. JVM中的方法调用指令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Java语言中方法重写的本质"><span class="toc-number">1.1.2.7.3.</span> <span class="toc-text">3. Java语言中方法重写的本质</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-虚方法表"><span class="toc-number">1.1.2.7.4.</span> <span class="toc-text">4.虚方法表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#方法返回地址"><span class="toc-number">1.1.2.8.</span> <span class="toc-text">方法返回地址</span></a></li></ol></li></ol></li></ol></li></ol>
+                    </div>
+                </span>
+            </div>
+        </div>
+        
+    </div>
+</aside>
+
+
+
+  
+  
   
 
-    
+  
+
+  
+
+  
 
 
           </div>
@@ -216,9 +425,9 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
